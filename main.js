@@ -15,13 +15,14 @@ function addItem(e){
 
   // Get input value
   var newItem = document.getElementById('item').value;
-
+  var newItem1 = document.getElementById('description').value;
   // Create new li element
   var li = document.createElement('li');
   // Add class
   li.className = 'list-group-item';
   // Add text node with input value
   li.appendChild(document.createTextNode(newItem));
+  li.appendChild(document.createTextNode(" " +newItem1));
 
   // Create del button element
   var deleteBtn = document.createElement('button');
@@ -29,7 +30,7 @@ function addItem(e){
 
   // Add classes to del button
   deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
-  editBtn.className = 'btn btn-primary btn-sm float-right edit-button';
+  editBtn.className = 'btn  btn-sm float-right edit-button';
 
   // Append text node
   deleteBtn.appendChild(document.createTextNode('X'));
@@ -63,7 +64,9 @@ function filterItems(e){
   // Convert to an array
   Array.from(items).forEach(function(item){
     var itemName = item.firstChild.textContent;
-    if(itemName.toLowerCase().indexOf(text) != -1){
+    var description = item.childNodes[1].textContent;
+
+    if(itemName.toLowerCase().indexOf(text) != -1 ||  description.toLowerCase().indexOf(text) != -1){
       item.style.display = 'block';
     } else {
       item.style.display = 'none';
